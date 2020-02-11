@@ -5,7 +5,7 @@ module.exports = {
     mode: 'development',
     context: path.join(__dirname, 'src'),
     entry: [
-        './main.js',
+        './main.tsx',
     ],
     output: {
         path: path.join(__dirname, 'www'),
@@ -13,8 +13,9 @@ module.exports = {
     },
     module: {
         rules: [
+            { test: /\.tsx?$/, loader: 'ts-loader' },
             {
-                test: /\.js$/,
+                test: /\.(js|ts)x$/,
                 exclude: /node_modules/,
                 use: [
                     'babel-loader',
@@ -35,5 +36,6 @@ module.exports = {
             template: "./index.html",
             filename: "./index.html"
         })
-    ]
+    ],
+    resolve: {extensions: [ '.ts', '.tsx', '.js', '.jsx']}
 };
