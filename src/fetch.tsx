@@ -1,8 +1,12 @@
 import React from 'react'
 
-class Fetch extends React.Component<{}, { json: string | null }> {
+type TState = {
+    json: string
+}
+
+class Fetch extends React.Component<{}, TState> {
     state = {
-        json: null,
+        json: '',
     }
 
     _isMounted = false

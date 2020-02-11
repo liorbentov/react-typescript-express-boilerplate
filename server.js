@@ -9,9 +9,10 @@ const compiler = webpack(webpackConfig)
 
 app.use(express.static(__dirname + '/www'))
 
-const devServerEnabled = true
+const devServerEnabled = process.env.MODE === 'development'
 
 if (devServerEnabled) {
+    console.log('Development')
     //reload=true:Enable auto reloading when changing JS files or content
     //timeout=1000:Time from disconnecting from server to reconnecting
     webpackConfig.entry.app.unshift(
@@ -30,6 +31,19 @@ if (devServerEnabled) {
 
     //Enable "webpack-hot-middleware"
     app.use(webpackHotMiddleware(compiler))
+} else {
+    console.log('Production')
+    app.use(
+        webpackDevMiddleware(compiler, {
+            hot: true,
+            filename: 'bundle.js',
+            publicPath: '/',
+            stats: {
+                colors: true,
+            },
+            historyApiFallback: true,
+        })
+    )
 }
 
 app.get('/user', function(req, res) {
