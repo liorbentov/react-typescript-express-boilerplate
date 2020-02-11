@@ -32,16 +32,6 @@ if (devServerEnabled) {
     app.use(webpackHotMiddleware(compiler))
 }
 
-// app.use(webpackDevMiddleware(compiler, {
-//     hot: true,
-//     filename: 'bundle.js',
-//     publicPath: '/',
-//     stats: {
-//         colors: true,
-//     },
-//     historyApiFallback: true,
-// }));
-
 app.get('/user', function(req, res) {
     res.send('Got a GET request at /user')
 })
