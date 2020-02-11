@@ -15,7 +15,7 @@ module.exports = {
     },
     context: path.join(__dirname, 'src'),
     entry: {
-        app: ['react-hot-loader/patch', './main.tsx'],
+        app: ['react-hot-loader/patch', '@babel/polyfill', './main.tsx'],
     },
     output: {
         path: path.join(__dirname, 'www'),

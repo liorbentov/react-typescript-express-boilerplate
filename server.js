@@ -36,6 +36,13 @@ app.get('/user', function(req, res) {
     res.send('Got a GET request at /user')
 })
 
+app.get('/json', function(req, res) {
+    res.json({
+        name: 'myName',
+        age: 30,
+    })
+})
+
 const server = app.listen(3000, function() {
     const host = server.address().address
     const port = server.address().port
