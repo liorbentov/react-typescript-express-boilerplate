@@ -5,13 +5,24 @@ class Fetch extends React.Component<{}, { json: string | null }> {
         json: null,
     }
 
+    _isMounted = false
+
     componentDidMount() {
         this.callFetch()
+        this._isMounted = true
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false
     }
 
     callFetch = async () => {
         const response = await fetch('http://localhost:3000/json')
-        this.setState({ json: JSON.stringify(await response.json()) })
+        const content = await response.json()
+
+        if (this._isMounted) {
+            this.setState({ json: JSON.stringify(content) })
+        }
     }
 
     render() {
